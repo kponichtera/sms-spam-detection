@@ -8,12 +8,15 @@ stages:
   preprocess:
     cmd: python src/text_preprocessing.py
     deps:
+    - dataset
     - src/text_preprocessing.py
     outs:
     - output/preprocessed_data.joblib
+    - output/preprocessor.joblib
   train:
     cmd: python src/text_classification.py AdaBoost
     deps:
     - src/text_classification.py
+    - output/preprocessed_data.joblib
     outs:
     - output/AdaBoost_model.joblib
